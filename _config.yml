@@ -19,8 +19,8 @@ locale                   : "en-US"
 title                    : "ss_musiqe"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
-name                     : "park seng sik"
-description              : "An amazing website."
+name                     : "park_seng_sik"
+description              : "An amazing"
 url                      : "https://parksengsik.github.io/sengsik.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
@@ -93,7 +93,7 @@ analytics:
 
 # Site Author
 author:
-  name             : "Park Seng Sik"
+  name             : "Park_Seng_Sik"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "I am an **amazing** person."
   location         : "Somewhere"
