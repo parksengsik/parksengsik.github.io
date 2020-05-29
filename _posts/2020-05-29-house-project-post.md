@@ -4,8 +4,10 @@ date : 2020-05-29 19:28:30 -0400
 categories : Kaggle update Project
 ---
 
-###[Project] 주택 가격 예측 / 고급 회귀 기법
-####1. 데이터 처리를 위한 패키지와 모듈 불러오기
+Project : 주택 가격 예측 / 고급 회귀 기법
+
+
+1. 데이터 처리를 위한 패키지와 모듈 불러오기
 ```python
 import numpy as np
 import pandas as pd
@@ -24,13 +26,12 @@ warnings.warn = igonore_warn
 pd.set_option('display.float_format', lambda x : '{:.3f}'.format(x))
 print(check_output(['ls','/Users/mac/Desktop/house_project/data']).decode("utf8"))
 ```
-####2. 데이터 불러오기
+2. 데이터 불러오기
 ```python
 train = pd.read_csv('/Users/mac/Desktop/house_project/data/train.csv')
 test = pd.read_csv('/Users/mac/Desktop/house_project/data/test.csv')
 ```
-
-####3. train 파일 데이터에서 상위 5개를 불러오기
+3. train 파일 데이터에서 상위 5개를 불러오기
 ```python
 train.head(5)
 ```
