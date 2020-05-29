@@ -41,9 +41,7 @@ train.head(5)
 test.head(5)
 ```
 <img src="https://user-images.githubusercontent.com/60723495/83250803-a8cee180-a1e3-11ea-94dc-7801312516a5.png" width="1000" height="200">
-5. 각각의 DataFrame의 size를 출력 / 각각 DataFrame에서 맨앞의 id를 삭제한 후의 size를 출력
-
-
+5. 각각의 DataFrame의 size를 출력<br> 각각 DataFrame에서 맨앞의 id를 삭제한 후의 size를 출력
 ```python
 print('The train data size before dropping Id feature is : {}' .format(train.shape))
 print('The test data size before dropping Id feature is : {}' .format(test.shape))
