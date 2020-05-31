@@ -110,3 +110,36 @@ for c in cols :
 print('Shape all_data : {}' .format(all_data.shape))
 all_data['TotalSF'] = all_data['TotalBsmtSF'] + all_data['1stFlrSF'] + all_data['2ndFlrSF']
 ```
+
+* Skewed Features(비뚤어진 특징) - Box_Cox변환
+ + 데이터를 정규 분포에 가깝게 만들거나 데이터 분산을 안정화하는 작업이다.
+ + 정규성을 가정하는 분석법이나 정상성을 요구하는 분석법에 사용하기에 앞선 전처리이다.
+ + 데이터가 모두 양수여야 한다는 조건이 필요하다.
+ + 대상 변수인 SalePrice의 값이 주택의 가격을 뜻함으로 모두 양수를 의미한다, 따라서 Box-Cox Transformation을 사용 할 수 있다.
+ + 이번 프로젝트에서는 Log Transformation 보다 Box-Cox Transformation가 신뢰 수준을 향상시키는데 도움이 될 것이다.
+
+* 분포도가 한쪽으로 치우치는 않았는 지 확인하여 정규화가 필요한지 판단한다.
+```python
+numeric_feats = all_data.dtypes[all_data.dtypes != 'object'].index
+skewed_feats = all_data[numeric_feats].apply(lambda x: skew(x.dropna())).sort_values(ascending = False)
+print('\nSkew in numerical features: \n')
+skewness = pd.DataFrame({'skew' : skewed_feats})
+skewness.head(10)
+```
+* Log transformation이 아닌 Box-Cox Transformation를 사용하였다.
+```python
+skewness = skewness[abs(skewness) > 0.75]
+print('There are {} skewed numerical features to Box Cox transform' .format(skewness.shape[0]))
+from scipy.special import boxcox1p
+skewed_features = skewness.index
+lam = 0.15
+for feat in skewed_features:
+    all_data[feat] = boxcox1p(all_data[feat], lam)
+all_data = pd.get_dummies(all_data)
+print(all_data.shape)
+```
+* 처리되어진 각각의 값을 변수에 저장한다.
+```python
+train = all_data[:ntrain]
+test = all_data[:ntest]
+```
