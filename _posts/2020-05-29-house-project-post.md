@@ -1,5 +1,5 @@
 ---
-title: 주택 가격 예측
+title: 주택 가격 예측(1) - Data Read/ EDA  
 date : 2020-05-29 19:28:30 -0400
 categories : Kaggle update Project
 ---
@@ -56,3 +56,51 @@ The test data size before dropping Id feature is : (1459, 80)
 The train data size before dropping Id feature is : (1460, 80)
 The test data size before dropping Id feature is : (1459, 79)
 ```
+6. GrLivArea 와 SalePrice 간의 그래프를 출력
+```python
+fig, ax = plt.subplots()
+ax.scatter(x=train['GrLivArea'], y=train['SalePrice'])
+plt.ylabel('SalePrice', fontsize=13)
+plt.xlabel('GrLivArea', fontsize=13)
+plt.show()
+```
+<img src="https://user-images.githubusercontent.com/60723495/83344400-3a079a80-a341-11ea-8ce1-1f3456b2f6d4.png" width="300" height="200">
+7. GrLivArea 와 SalePrice 간의 이상치를 제거하고 그래프를 출력
+```python
+train = train.drop(train[(train['GrLivArea'] > 4000) & (train['SalePrice'] < 300000)].index)
+fig, ax = plt.subplots()
+ax.scatter(train['GrLivArea'], train['SalePrice'])
+plt.ylabel('SalePrice', fontsize = 13)
+plt.xlabel('GrLivArea', fontsize =13)
+plt.show()
+```
+<img src="https://user-images.githubusercontent.com/60723495/83344412-9bc80480-a341-11ea-9943-dc2601582441.png" width="300" height="200">
+8. 대상 변수인 SalePrice를 관한 빈도수와 오차 분포를 나타낸 그래프를 출력
+```python 
+sns.distplot(train['SalePrice'], fit = norm)
+(mu, sigma) = norm.fit(train['SalePrice'])
+print('\n mu = {:.2f} and sigma = {:.2f}\n' .format(mu, sigma))
+plt.legend(['Normal dist. ($\mu=$ {:.2f} and $\sigma=$ {:.2f})'.format(mu, sigma)], loc = 'best')
+plt.ylabel('Frequency')
+plt.title('SalePrice distribution')
+fig = plt.figure()
+res = stats.probplot(train['SalePrice'], plot=plt)
+plt.show()
+```
+<img src="https://user-images.githubusercontent.com/60723495/83344432-d631a180-a341-11ea-92e0-ec294bc44e59.png" width="300" height="200">
+<img src="https://user-images.githubusercontent.com/60723495/83344459-27da2c00-a342-11ea-8d3a-bc5695a89d77.png" width="300" height="200">
+9. 대상 변수인 SalePrice를 관한 빈도수와 오차 분포를 로그변환하여 나타낸 그래프를 출력
+```python
+train['SalePrice'] = np.log1p(train['SalePrice'])
+sns.distplot(train['SalePrice'], fit = norm)
+(mu, sigma) = norm.fit(train['SalePrice'])
+print('\n mu = {:.2f} and sigma = {:.2f}\n' .format(mu, sigma))
+plt.legend(['Normal dist. ($\mu=$ {:.2f} and $\sigma$ {:.2f})'.format(mu, sigma)], loc = 'best')
+plt.ylabel('Frequency')
+plt.title('SalePrice distribution')
+fig = plt.figure()
+res = stats.probplot(train['SalePrice'], plot=plt)
+plt.show()
+```
+<img src="https://user-images.githubusercontent.com/60723495/83344479-72f43f00-a342-11ea-8534-ceeedbe0262f.png" width="300" height="200">
+<img src="https://user-images.githubusercontent.com/60723495/83344490-ab941880-a342-11ea-85d8-3e003f11ebdd.png" width="300" height="200">
