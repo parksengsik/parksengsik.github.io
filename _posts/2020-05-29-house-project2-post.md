@@ -1,6 +1,6 @@
 ---
 title: 주택 가격 예측(2) - Data Processing  
-date : 2020-05-29 19:28:30 -0400
+date : 2020-05-31 14:28:30 -0400
 categories : Kaggle update Project
 ---
 
@@ -32,3 +32,81 @@ plt.ylabel('Percent of missing values', fontsize = 15)
 plt.title('Percent missing data by feature', fontsize = 15)
 ```
 <img src="https://user-images.githubusercontent.com/60723495/83344918-34fa1980-a348-11ea-8e19-6ca22749e3e0.png" width="500" height="500">
+
+* 각각의 변수간에 상관성을 분석한 그래프 출력
+```python
+corrmat = train.corr()
+plt.subplots(figsize=(12,9))
+sns.heatmap(corrmat, vmax=0.9, square=True)
+```
+<img src="https://user-images.githubusercontent.com/60723495/83344966-b6ea4280-a348-11ea-99ee-933b14bd4e68.png" width="600" height="500">
+
+  + 데이터 Columns별 상관성을 분석한 그래프
+  + 상관성이 있다고 해서 무조건으로 믿을 수 없는 자료
+
+* 각각의 변수의 missing data를 각각 변수의 형식에 맞추어서 값을 None과 0, mode(0)으로 채우거나 삭제
+```python
+all_data['PoolQC'] = all_data['PoolQC'].fillna('None')
+all_data['MiscFeature'] = all_data['MiscFeature'].fillna('None')
+all_data['Alley'] = all_data['Alley'].fillna('None')
+all_data['Fence'] = all_data['Fence'].fillna('None')
+all_data['FireplaceQu'] = all_data['FireplaceQu'].fillna('None')
+all_data['LotFrontage'] = all_data.groupby('Neighborhood')['LotFrontage'].transform(lambda x: x.fillna(x.median()))
+for col in ('GarageType', 'GarageFinish', 'GarageQual', 'GarageCond'):
+    all_data[col] = all_data[col].fillna('None')
+for col in ('GarageYrBlt', 'GarageArea', 'GarageCars'):
+    all_data[col] = all_data[col].fillna(0)
+for col in ('BsmtFinSF1', 'BsmtFinSF2', 'BsmtUnfSF','TotalBsmtSF', 'BsmtFullBath', 'BsmtHalfBath'):
+    all_data[col] = all_data[col].fillna(0)
+for col in ('BsmtQual', 'BsmtCond', 'BsmtExposure', 'BsmtFinType1', 'BsmtFinType2'):
+    all_data[col] = all_data[col].fillna('None')
+all_data["MasVnrType"] = all_data["MasVnrType"].fillna("None")
+all_data["MasVnrArea"] = all_data["MasVnrArea"].fillna(0)
+all_data['MSZoning'] = all_data['MSZoning'].fillna(all_data['MSZoning'].mode()[0])
+all_data = all_data.drop(['Utilities'], axis=1)
+all_data['Functional'] = all_data['Functional'].fillna('Typ')
+all_data['Electrical'] = all_data['Electrical'].fillna(all_data['Electrical'].mode()[0])
+all_data['KitchenQual'] = all_data['KitchenQual'].fillna(all_data['KitchenQual'].mode()[0])
+all_data['Exterior1st'] = all_data['Exterior1st'].fillna(all_data['Exterior1st'].mode()[0])
+all_data['Exterior2nd'] = all_data['Exterior2nd'].fillna(all_data['Exterior2nd'].mode()[0])
+all_data['SaleType'] = all_data['SaleType'].fillna(all_data['SaleType'].mode()[0])
+all_data['MSSubClass'] = all_data['MSSubClass'].fillna('None')
+```
+
+* 다시 한번더 missing ratio를 출력하면 아무런 값이 나오지 않게 된다.
+```python
+all_data_na = (all_data.isnull().sum() / len(all_data)) * 100
+all_data_na = all_data_na.drop(all_data_na[all_data_na == 0].index).sort_values(ascending = False)
+missing_data = pd.DataFrame({'Missing Ratio' : all_data_na})
+missing_data.head()
+```
+<img src="https://user-images.githubusercontent.com/60723495/83345083-febd9980-a349-11ea-8e75-0c1daab79bf9.png" width="300" height="100">
+
+* Feature Engineering
+  + Feature Engineering은 Machine Learning 알고리즘을 작동하기 위해 데이터에 대한 도메인 지식을 활용하여 특징(feature)를 만들어내는 과정이다.
+  + 다른 정의를 살펴보면, Machine Learning Model을 위한 데이터 레이블의 칼럼(특징)을 생성하거나 선택하는 작업을 의미한다.
+  + 간단히 정리하면, 모델의 성능을 높이기 위해 모델에 입력할 데이터를 만들기 위해 주 어진 초기 데이터로부터 특징을 가공하고 생성하는 전체 과정을 의미한다.
+  + 모델 성능에 미치는 영향이 크기 때문에 Machine Learning 응용에 있어서 굉장히 중요 한 단계이며, 전문성과 시간과 비용이 많이 드는 작업이다.
+
+* 각각의 변수중 변수의 형식을 계산하기 편하게 변환한다.
+```python
+all_data['MSSubClass'] = all_data['MSSubClass'].apply(str)
+all_data['OverallCond'] = all_data['OverallCond'].astype(str)
+all_data['YrSold'] = all_data['YrSold'].astype(str)
+all_data['MoSold'] = all_data['MoSold'].astype(str)
+```
+* LabelEncoder를 통하여 변수의 형식이 String인 문자를 수치화하고, 각각 변수에 항목들을 리스트화하여 변수로 저장한다.
+```python
+from sklearn.preprocessing import LabelEncoder
+cols = ('FireplaceQu', 'BsmtQual', 'BsmtCond', 'GarageQual', 'GarageCond', 
+        'ExterQual', 'ExterCond','HeatingQC', 'PoolQC', 'KitchenQual', 'BsmtFinType1', 
+        'BsmtFinType2', 'Functional', 'Fence', 'BsmtExposure', 'GarageFinish', 'LandSlope',
+        'LotShape', 'PavedDrive', 'Street', 'Alley', 'CentralAir', 'MSSubClass', 'OverallCond', 
+        'YrSold', 'MoSold')
+for c in cols :
+    lbl = LabelEncoder()
+    lbl.fit(list(all_data[c].values))
+    all_data[c] = lbl.transform(list(all_data[c].values))
+print('Shape all_data : {}' .format(all_data.shape))
+all_data['TotalSF'] = all_data['TotalBsmtSF'] + all_data['1stFlrSF'] + all_data['2ndFlrSF']
+```
