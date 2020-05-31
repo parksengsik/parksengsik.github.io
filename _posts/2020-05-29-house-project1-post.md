@@ -4,7 +4,9 @@ date : 2020-05-29 19:28:30 -0400
 categories : Kaggle update Project
 ---
 
-### Project : 주택 가격 예측 / 고급 회귀 기법 [데이터 다운링크](https://github.com/parksengsik/parksengsik.github.io/blob/master/data/house_project_data.zip)
+### Project : 주택 가격 예측 / 고급 회귀 기법  
+
+[데이터 다운링크](https://github.com/parksengsik/parksengsik.github.io/blob/master/data/house_project_data.zip)
 
 * 데이터 처리를 위한 패키지와 모듈 불러오기
 ```python
