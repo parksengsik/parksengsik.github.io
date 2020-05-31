@@ -18,6 +18,7 @@ import xgboost as xgb
 import lightgbm as lgb
 ```
 <br>
+
 * Lasso Regularization
 ```python
 lasso = make_pipeline(RobustScaler(), Lasso(alpha=0.0005, random_state=1))
@@ -29,7 +30,9 @@ lasso = make_pipeline(RobustScaler(), Lasso(alpha=0.0005, random_state=1))
   + Alpha 값의 기본값은 1.0이며, 과소 적합을 줄이기 위해서는 이 값을 줄여야 한다.
   + Grid Search 또는 Random Search를 alpha에 넣어서 사용한다.
   + Max_iter는 반복 실행하는 최대 횟수를 의미한다.
+  
 <br>
+
 * Elastic Net Regularization
 ```python
 ENet = make_pipeline(RobustScaler(), ElasticNet(alpha=0.0005, l1_ratio= .9, random_state=3))
@@ -40,7 +43,9 @@ ENet = make_pipeline(RobustScaler(), ElasticNet(alpha=0.0005, l1_ratio= .9, rand
 영향을 주는 것처럼 판단이 될 수 있다.
     - Lasso만 하면 A가 사라지고 B만 남거나, Ridge만 하면 beta를 전체적으로 줄여줘 서 변수 선택이 안되는 문제가 생긴다.
     - 이런 경우를 해결하기 위해 사용한다.
+
 <br>
+
 * Ridge Regularization
 ```python
 KRR = KernelRidge(alpha=0.6, kernel='polynomial', degree=2, coef0=2.5)
@@ -51,7 +56,9 @@ KRR = KernelRidge(alpha=0.6, kernel='polynomial', degree=2, coef0=2.5)
   + Regularization(규제)은 과대 적합이 되지 않도록 모델을 강제로 제한한다는 의미한다.
   + Grid Search 또는 Random Search를 alpha에 넣어서 사용한다.
   + Max_iter는 반복 실행하는 최대 횟수를 의미한다.
+
 <br>
+
 * Gradient Boost Regularization
 ```python
 GBoost = GradientBoostingRegressor(n_estimators=3000, learning_rate=0.05, max_depth=4, max_features=
@@ -65,7 +72,9 @@ GBoost = GradientBoostingRegressor(n_estimators=3000, learning_rate=0.05, max_de
   + 1~5개의 깊지 않은 트리를 사용하기 때문에 메모리를 적게 사용하고 예측이 빠르다.
   + Learning_rate : 오차를 얼마나 강하게 보정할 것인지를 제어한다.
   + N_estimater : 값을 키우면 앙상블에 트리가 더 추가되어 모델의 복잡도가 커지고 훈련 세트에서의 실수를 바로잡을 기회가 많아지지만, 너무 크면 모델이 복잡해지고 과대 적 합이 될 수 있다.
+
 <br>
+
 * Xgboost Regularization
 ```python
 model_xgb = xgb.XGBRegressor(colsample_bytree=0.4603, gamma=0.0468, learning_rate=0.05, max_depth=3,min_child_weight=1.7817, n_estimators=2200, reg_alpha=0.4640, reg_lambda=0.8571, subsample=0.5213, silent=1, random_state=7, nthread=-1)
@@ -75,7 +84,9 @@ model_xgb = xgb.XGBRegressor(colsample_bytree=0.4603, gamma=0.0468, learning_rat
   + 분류와 회귀가 둘 다 가능하다.
   + 조기 종료(early stopping)을 제공한다.
   + Gradient Boost를 기반으로 한다.(즉, 앙상블 Boosting의 특징인 가중치 부여를 경사하 강법으로 한다)
+
 <br>
+
 * Xgboost의 hyperparmeter
   + N_estimators(혹은 num_boost_round) : 결정 트리의 개수
   + Max_depth : 트리의 깊이
@@ -85,7 +96,9 @@ model_xgb = xgb.XGBRegressor(colsample_bytree=0.4603, gamma=0.0468, learning_rat
   + Min_split_loss : 리프 노드를 추가적으로 나눌지 결정하는 값
   + Reg_lambda : L2 규제
   + Reg_alpha : L1 규제
+
 <br>
+
 * LightGBM Regularization
 ```python
 model_lgb = lgb.LGBMRegressor(objective='regression',num_leaves=5,learning_rate=0.05, n_estimators=720, max_bin=55, bagging_fraction=0.8 , bagging_freq=5, feature_fraction=0.2319, feature_fraction_seed=9, bagging_seed=9, min_data_in_leaf=6, min_sum_hessian_in_leaf=11)
@@ -98,7 +111,9 @@ model_lgb = lgb.LGBMRegressor(objective='regression',num_leaves=5,learning_rate=
   + Tree의 균형은 맞추지 않고 leaf node를 지속적으로 분할하면서 진행한다.
   + Leaf node를 max delta loss 값을 가지는 Leaf node를 계속 분할해 간다.
   + 비 대칭적이고 깊은 Tree가 생성되지만 동일한 leaf를 생성할 때 leaf-wise는 Level-wise 보다 손실을 줄일 수 있다.
+
 <br>
+
 * LightGBM의 hyperparmeter
   + N_estimators : 반복하려는 트리의 개수
   + Learning_rate : 학습률
@@ -108,12 +123,16 @@ model_lgb = lgb.LGBMRegressor(objective='regression',num_leaves=5,learning_rate=
   + Fearure_fraction : 트리를 학습할 때마다 선택하는 feature의 비율
   + Reg_lambda : L2 규제
   + Reg_alpha : L1 규제
+
 <br>
+
 * LightGBM의 Leaf-wise 트리 분석
 <img src="https://user-images.githubusercontent.com/60723495/83345630-6f67b480-a350-11ea-8256-fda78e1e3d1a.png" width="600" height="300">
   + 기존의 Tree들은 Tree의 depth(깊이)를 줄이기위해서 Level-wise(균형 트리)분할을 사용하는데, LightGBM은 위와 같이 다르게 모델이 동작한다.
   + 균형을 잡아주어야 하기 때문에 Tree의 depth가 줄어든다, 그 대신 그 균형을 잡아주기 위한 연산이 추가 되는 것이 단점이다.
+
 <br>
+
 * RMSLE(Root Mean Square Logarithmic Error)
 ```python
 n_folds = 5
