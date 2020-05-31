@@ -126,7 +126,7 @@ print('\nSkew in numerical features: \n')
 skewness = pd.DataFrame({'skew' : skewed_feats})
 skewness.head(10)
 ```
-* Log transformation이 아닌 Box-Cox Transformation를 사용하였다.
+* 로그변환이 아닌 Box_Cox변환을 사용하였다.
 ```python
 skewness = skewness[abs(skewness) > 0.75]
 print('There are {} skewed numerical features to Box Cox transform' .format(skewness.shape[0]))
