@@ -21,13 +21,13 @@ import lightgbm as lgb
 ```python
 lasso = make_pipeline(RobustScaler(), Lasso(alpha=0.0005, random_state=1))
 ```
-  + 선형 회귀의 Regularization(규제)을 적용하는 대안이다.
-  + 계수를 0에 가깝게 만들려고 하여 이르 L1규제라고 하며, 어떤 계수는 0이 되기도 하는
+   + 선형 회귀의 Regularization(규제)을 적용하는 대안이다.
+   + 계수를 0에 가깝게 만들려고 하여 이르 L1규제라고 하며, 어떤 계수는 0이 되기도 하는
 데 이는 완전히 제외하는 Feature가 생긴다는 의미한다.
-  + Feature 선택이 자동으로 이루어진다고 볼 수 있다.
-  + Alpha 값의 기본값은 1.0이며, 과소 적합을 줄이기 위해서는 이 값을 줄여야 한다.
-  + Grid Search 또는 Random Search를 alpha에 넣어서 사용한다.
-  + Max_iter는 반복 실행하는 최대 횟수를 의미한다.
+   + Feature 선택이 자동으로 이루어진다고 볼 수 있다.
+   + Alpha 값의 기본값은 1.0이며, 과소 적합을 줄이기 위해서는 이 값을 줄여야 한다.
+   + Grid Search 또는 Random Search를 alpha에 넣어서 사용한다.
+   + Max_iter는 반복 실행하는 최대 횟수를 의미한다.
 
 * Elastic Net Regularization
 ```python
