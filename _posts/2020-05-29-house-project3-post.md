@@ -75,15 +75,15 @@ model_xgb = xgb.XGBRegressor(colsample_bytree=0.4603, gamma=0.0468, learning_rat
   + 조기 종료(early stopping)을 제공한다.
   + Gradient Boost를 기반으로 한다.(즉, 앙상블 Boosting의 특징인 가중치 부여를 경사하 강법으로 한다)
 
-* Xgboost의 hyperparmeter
-  + N_estimators(혹은 num_boost_round) : 결정 트리의 개수
-  + Max_depth : 트리의 깊이
-  + Colsample_bytree : 칼럼의 샘플링 비율
-  + Subsample : weak learner가 학습에 사용하는 데이터 샘플링 비율
-  + Learning_rate : 학습률
-  + Min_split_loss : 리프 노드를 추가적으로 나눌지 결정하는 값
-  + Reg_lambda : L2 규제
-  + Reg_alpha : L1 규제
+  + Xgboost의 hyperparmeter
+    - N_estimators(혹은 num_boost_round) : 결정 트리의 개수
+    - Max_depth : 트리의 깊이
+    - Colsample_bytree : 칼럼의 샘플링 비율
+    - Subsample : weak learner가 학습에 사용하는 데이터 샘플링 비율
+    - Learning_rate : 학습률
+    - Min_split_loss : 리프 노드를 추가적으로 나눌지 결정하는 값
+    - Reg_lambda : L2 규제
+    - Reg_alpha : L1 규제
 
 * LightGBM Regularization
 ```python
@@ -98,15 +98,15 @@ model_lgb = lgb.LGBMRegressor(objective='regression',num_leaves=5,learning_rate=
   + Leaf node를 max delta loss 값을 가지는 Leaf node를 계속 분할해 간다.
   + 비 대칭적이고 깊은 Tree가 생성되지만 동일한 leaf를 생성할 때 leaf-wise는 Level-wise 보다 손실을 줄일 수 있다.
 
-* LightGBM의 hyperparmeter
-  + N_estimators : 반복하려는 트리의 개수
-  + Learning_rate : 학습률
-  + Max_depth : 트리의 최대 깊이
-  + Min_child_samples : 리프 노드가 되기 위한 최소한의 샘플 데이터 수
-  + Num_leaves:하나의트리가가질수있는최대리프개수
-  + Fearure_fraction : 트리를 학습할 때마다 선택하는 feature의 비율
-  + Reg_lambda : L2 규제
-  + Reg_alpha : L1 규제
+  + LightGBM의 hyperparmeter
+    - N_estimators : 반복하려는 트리의 개수
+    - Learning_rate : 학습률
+    - Max_depth : 트리의 최대 깊이
+    - Min_child_samples : 리프 노드가 되기 위한 최소한의 샘플 데이터 수
+    - Num_leaves:하나의트리가가질수있는최대리프개수
+    - Fearure_fraction : 트리를 학습할 때마다 선택하는 feature의 비율
+    - Reg_lambda : L2 규제
+    - Reg_alpha : L1 규제
 
 * LightGBM의 Leaf-wise 트리 분석
 <img src="https://user-images.githubusercontent.com/60723495/83345630-6f67b480-a350-11ea-8256-fda78e1e3d1a.png" width="600" height="300">
