@@ -111,7 +111,7 @@ print('Shape all_data : {}' .format(all_data.shape))
 all_data['TotalSF'] = all_data['TotalBsmtSF'] + all_data['1stFlrSF'] + all_data['2ndFlrSF']
 ```
 
-* Skewed Features(비뚤어진 특징) - Box_Cox변환
+* Skewed Features(비뚤어진 특징 : Box_Cox변환)
  + 데이터를 정규 분포에 가깝게 만들거나 데이터 분산을 안정화하는 작업이다.
  + 정규성을 가정하는 분석법이나 정상성을 요구하는 분석법에 사용하기에 앞선 전처리이다.
  + 데이터가 모두 양수여야 한다는 조건이 필요하다.
