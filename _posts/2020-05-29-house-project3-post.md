@@ -17,7 +17,7 @@ from sklearn.metrics import mean_squared_error
 import xgboost as xgb
 import lightgbm as lgb
 ```
-<br><br><br>
+<br><br>
 * Lasso Regularization
 ```python
 lasso = make_pipeline(RobustScaler(), Lasso(alpha=0.0005, random_state=1))
