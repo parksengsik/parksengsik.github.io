@@ -111,7 +111,7 @@ model_lgb = lgb.LGBMRegressor(objective='regression',num_leaves=5,learning_rate=
 * LightGBM의 Leaf-wise 트리 분석
   + 기존의 Tree들은 Tree의 depth(깊이)를 줄이기위해서 Level-wise(균형 트리)분할을 사용하는데, LightGBM은 위와 같이 다르게 모델이 동작한다.
   + 균형을 잡아주어야 하기 때문에 Tree의 depth가 줄어든다, 그 대신 그 균형을 잡아주기 위한 연산이 추가 되는 것이 단점이다.
-<img src="https://user-images.githubusercontent.com/60723495/83345630-6f67b480-a350-11ea-8256-fda78e1e3d1a.png" width="600" height="300">
+  <img src="https://user-images.githubusercontent.com/60723495/83345630-6f67b480-a350-11ea-8256-fda78e1e3d1a.png" width="600" height="300">
 
 * RMSLE(Root Mean Square Logarithmic Error)
   + 과대평가 된 항목보다는 과소평가 된 항목에 페널티를 준다.
