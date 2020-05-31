@@ -27,7 +27,7 @@ pd.set_option('display.float_format', lambda x : '{:.3f}'.format(x))
 print(check_output(['ls','/Users/mac/Desktop/house_project/data']).decode("utf8"))
 ```
 
-    + [데이터 다운링크](https://github.com/parksengsik/parksengsik.github.io/blob/master/data/house_project_data.zip)
+[데이터 다운링크](https://github.com/parksengsik/parksengsik.github.io/blob/master/data/house_project_data.zip)
 
 <br>
 
