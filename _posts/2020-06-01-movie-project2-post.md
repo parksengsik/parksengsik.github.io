@@ -1,5 +1,5 @@
 ---
-title: 영화 추천 시스템(2) - 프로그래밍(라이브러리)  
+title: 영화 추천 시스템 - 프로그래밍(라이브러리)  
 date : 2020-06-01 11:38:30 -0400
 categories : Kaggle update Project
 ---
