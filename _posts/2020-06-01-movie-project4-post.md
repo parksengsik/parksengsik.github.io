@@ -1,6 +1,6 @@
 ---
 title: 영화 추천 시스템 - 프로그래밍(콘텐츠 기반 필터링)  
-date : 2020-06-01 14:02:30 -0400
+date : 2020-06-01 16:02:30 -0400
 categories : Kaggle update Project
 ---
 
