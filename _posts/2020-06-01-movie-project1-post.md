@@ -1,6 +1,6 @@
 ---
 title: 영화 추천 시스템(1) - 추천 시스템 이란?  
-date : 2020-05-31 15:42:30 -0400
+date : 2020-06-01 10:24:30 -0400
 categories : Kaggle update Project
 ---
 
@@ -39,4 +39,7 @@ categories : Kaggle update Project
 <img src="https://user-images.githubusercontent.com/60723495/83367750-169c2880-a3f1-11ea-88c6-4d75fd0fd943.png" width="700" height="300">
 
 참고 사이트 2 : <https://lsjsj92.tistory.com/563?category=853217>
+
+
+
 참고 사이트 2 : <https://lsjsj92.tistory.com/564?category=853217>
