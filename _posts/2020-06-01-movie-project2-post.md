@@ -4,9 +4,9 @@ date : 2020-06-01 11:38:30 -0400
 categories : Kaggle update Project
 ---
 
-#### 영화추천 프로그래밍
+### 영화추천 프로그래밍()
 
-##### 활용할 라이브러리와 패키지 불러오기
+#### 활용할 라이브러리와 패키지 불러오기
 ```python
 %matplotlib inline
 import pandas as pd
