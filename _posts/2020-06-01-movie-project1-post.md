@@ -38,8 +38,5 @@ categories : Kaggle update Project
 * 행렬분해로 잠재요인을 찾아내는 방법의 장점은 '저장공간 절약'이다.
 <img src="https://user-images.githubusercontent.com/60723495/83367750-169c2880-a3f1-11ea-88c6-4d75fd0fd943.png" width="700" height="300">
 
-참고 사이트 1 : <https://lsjsj92.tistory.com/563?category=853217>
-
-
-
+참고 사이트 1 : <https://lsjsj92.tistory.com/563?category=853217> <br>
 참고 사이트 2 : <https://lsjsj92.tistory.com/564?category=853217>
