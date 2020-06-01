@@ -1,5 +1,5 @@
 ---
-title: 영화 추천 시스템(1) - 추천 시스템 이란?  
+title: 영화 추천 시스템 - 추천 시스템 이란?  
 date : 2020-06-01 10:24:30 -0400
 categories : Kaggle update Project
 ---
