@@ -1,5 +1,5 @@
 ---
-title: 주택 가격 예측(2) - Data Processing  
+title: 주택 가격 예측 - Data Processing  
 date : 2020-05-31 14:28:30 -0400
 categories : Kaggle update Project
 ---
