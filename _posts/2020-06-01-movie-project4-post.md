@@ -69,7 +69,7 @@ smd.head()
 
 
 
-#### 7. Dataframe 'smd'안의 column인 'tagline'의 missing Data에 ''의 값을 넣고 'overview'의 column과 합쳐서 column 'description'에 저장하고 'description'의 missing data에 ''의 값으로 채우기
+#### 7. Dataframe 'smd'안의 column인 'tagline'의 missing Data에 ' '의 값을 넣고 'overview'의 column과 합쳐서 column 'description'에 저장하고 'description'의 missing data에 ' '의 값으로 채우기
 ```python
 smd['tagline'] = smd['tagline'].fillna('')
 smd['description'] = smd['overview'] + smd['tagline']
