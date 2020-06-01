@@ -1,5 +1,5 @@
 ---
-title: 주택 가격 예측(4) - Modeling(2)  
+title: 주택 가격 예측 - Modeling(2)  
 date : 2020-05-31 15:42:30 -0400
 categories : Kaggle update Project
 ---
