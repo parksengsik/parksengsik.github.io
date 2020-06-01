@@ -1,5 +1,5 @@
 ---
-title: 주택 가격 예측(1) - Data Read/ EDA  
+title: 주택 가격 예측 - Data Read/ EDA  
 date : 2020-05-29 19:28:30 -0400
 categories : Kaggle update Project
 ---
