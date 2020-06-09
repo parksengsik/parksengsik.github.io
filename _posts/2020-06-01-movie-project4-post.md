@@ -57,7 +57,7 @@ links_small = links_small[links_small['tmdbId'].notnull()]['tmdbId'].astype('int
 
 
 #### 6. Movie_data의 데이터가 너무 커서 축소하여 새로운 Dataframe 생성(Id 형변환하여 links_samll Id와 비교하여 일치하는 곳에 'tmdbId' column을 생성하고 값을 추가)
-```pyrhon
+```python
 md = md.drop([19730, 29503, 35587])
 md['id'] = md['id'].astype('int')
 smd = md[md['id'].isin(links_small)]
