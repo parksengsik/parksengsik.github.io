@@ -80,7 +80,7 @@ train_test = train_top200
 train_test
 ```
 
-<img src="https://user-images.githubusercontent.com/60723495/84466558-9610de00-acb4-11ea-919f-41bd453f9ecf.png" width="950" height="350">
+<img src="https://user-images.githubusercontent.com/60723495/84466558-9610de00-acb4-11ea-919f-41bd453f9ecf.png" width="950" height="400">
 
 
 
@@ -137,7 +137,7 @@ s['description'] = s['description'].apply(lambda x : key.findall(x))
 s.sort_values('like_cnt',ascending=False)
 ```
 
-<img src="https://user-images.githubusercontent.com/60723495/84467391-f9037480-acb6-11ea-847b-2af22c67cbb0.png" width="950" height="350">
+<img src="https://user-images.githubusercontent.com/60723495/84467391-f9037480-acb6-11ea-847b-2af22c67cbb0.png" width="950" height="400">
 
 
 
@@ -228,6 +228,6 @@ def get_recommendations(song_name) :
 get_recommendations('사랑했지만')
 ```
 
-<img src="https://user-images.githubusercontent.com/60723495/84468238-484aa480-acb9-11ea-9af9-57587b44deb5.png" width="950" height="500">
+<img src="https://user-images.githubusercontent.com/60723495/84468238-484aa480-acb9-11ea-9af9-57587b44deb5.png" width="950" height="550">
 
 Colab 공유 : <https://colab.research.google.com/drive/1OfeVzPXOMcPGrwh3m5Iw8fKmuDmmkLuX?usp=sharing>
