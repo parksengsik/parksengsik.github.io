@@ -1,6 +1,6 @@
 ---
 title: Kakao project(1) - 노래 추천 시스템  
-date : 2020-06-02 11:55:30 -0400
+date : 2020-06-12 14:38:30 -0400
 categories : Kakao update Project
 ---
 
