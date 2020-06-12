@@ -230,4 +230,3 @@ get_recommendations('사랑했지만')
 
 <img src="https://user-images.githubusercontent.com/60723495/84468238-484aa480-acb9-11ea-9af9-57587b44deb5.png" width="950" height="550">
 
-Colab 공유 : <https://colab.research.google.com/drive/1OfeVzPXOMcPGrwh3m5Iw8fKmuDmmkLuX?usp=sharing>
