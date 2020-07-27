@@ -71,6 +71,8 @@ data = train[['id','songs','tags']]
 ```
 * train(플레이리스트 데이터)에서 컬럼 'id'와 'songs', 'tags'를 추출하여 Dataframe 'data' 저장합니다.
 
+
+
 ```python
 data['tags'] = data['tags'].apply(lambda x: ' '.join(x))    
 ```
