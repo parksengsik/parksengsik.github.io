@@ -70,10 +70,12 @@ test = pd.read_json('test.json', typ='frame')
 data = train[['id','songs','tags']]     
 ```
 * train(플레이리스트 데이터)에서 컬럼 'id'와 'songs', 'tags'를 추출하여 Dataframe 'data' 저장합니다.
+
 ```python
 data['tags'] = data['tags'].apply(lambda x: ' '.join(x))    
 ```
 * Dataframe 'data'의 컬럼 'tags'를 리스트에서 하나의 문장으로 하여금 변환시킵니다.
+
 ```python
 data_song = data[['tags','songs']]
 
@@ -91,20 +93,24 @@ data_song['tags'] = data_song['tags'].astype(str)
 del data_song_unnsest
 ```
 * 플레이리스트에 수록된 곡들을 하나씩 분리하여 Dataframe 'data_song'에 저장합니다.
+
 ```python
 data_song_tags = data_song.sort_values(by = ['songs','tags']).groupby('songs').tags.apply(list).reset_index(name = 'tags')
 ```
 * Dataframe 'data_song'에서 곡별로 그룹화를 시켜 곡마다 'tags'를 합쳐주고 Dataframe 'data_song_tags'에 저장합니다.
+
 ```python
 data_tags = data_song_tags[['songs','tags']]    
 ```
 * Dataframe 'data_song_tags'에서 컬럼 'songs' 와 'tags'를 추출하여 Dataframe 'data_tags'에 저장한다. 
+
 ```python
 data_tags['tags'] = data_tags['tags'].apply(lambda x: ' '.join(x))  
 data_tags['tags'] = data_tags['tags'].apply(lambda x : x.split())   
 ```
 * Dataframe 'data_tags'의 컬럼 'tags'를 리스트에서 하나의 문장으로 하여금 변환시킵니다.
 * Dataframe 'data_tags'의 컬럼 'tags'를 문장에서 띄워쓰기 기준으로 리스트화 시킨다. 
+
 ```python
 song_tag = data_tags[['songs','tags']]
 
@@ -122,40 +128,49 @@ song_tag['tags'] = song_tag['tags'].astype(str)
 del song_tag_unnsest
 ```
 * Dataframe 'song_tags'의 컬럼 'tags'를 tag 하나씩 분리하여 Dataframe 'song_tag'에 저장하였습니다.
+
 ```python
 song_tag = song_tag.rename(columns = {'songs' : 'song_id','tags':'tag'})    
 ```
 * Dataframe 'song_tag'의 컬럼명을 변환시켜줍니다.
+
 ```python
 data_tags_song = song_tag.sort_values(by = ['song_id','tag']).groupby('tag').song_id.apply(list).reset_index(name = 'songs')  
 ```
 * Dataframe 'song_tag'에서 tag별로 그룹화를 시켜 곡마다 'song_id'를 합쳐주고 Dataframe 'data_tags_song'에 저장합니다.
+
 ```python
 data_song_tags['tags'] = data_song_tags['tags'].astype(str)
 ```
 * Dataframe 'data_song_tags'의 컬럼인 'tags' 자료형을 string으로 바꿔줍니다.
+
 ```python
 data_song_tags['tags'] = data_song_tags['tags'].apply(lambda x : x.lower())
 ```
 * Dataframe 'data_song_tags'의 컬럼인 'tags'의 영어를 소문자로 바꿔줍니다.
+
 ```python
 key = re.compile('[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|&|]+')
 data_song_tags['tags'] = data_song_tags['tags'].apply(lambda x : key.findall(x))
 ```
 * 한글과 영어, 숫자, 기호 &을 key로 설정합니다.
 * Dataframe 'data_song_tags'의 컬럼인 'tags'의 값을 key를 기준으로 하여 정규표현식을 사용하여 바꿔줍니다.
+
 ```python
 data_song_tags = data_song_tags.rename(columns={'songs':'song_id'})
 ```
 * Dataframe 'data_song_tags'의 컬럼명을 변환합니다.
+
 ```python
 song_id_list = data_song_tags['song_id'].astype(str).tolist()
 ```
 * Dataframe 'data_song_tags'의 컬럼 'song_id'를 자료형 string으로 바꿔주고 list형태로 'song_id_list'에 저장합니다.
+
 ```python
 tag_list = data_tags_song['tag'].astype(str).tolist()
 ```
 * Dataframe 'data_song_tags'의 컬럼 'tag'를 자료형 string으로 바꿔주고 list형태로 'tag_list'에 저장합니다.
+
 ```python
 val_train = test
 val_train['songs'] = val_train['songs'].apply(lambda x: list(map(str, x)))
@@ -163,6 +178,7 @@ val_train['id'] = val_train['id'].astype(int)
 ```
 * 최종 결과물 제출은 TEST.json 파일로 돌려야 함으로 'val_train'에 Dataframe 'test'를 저장하고 'val_train' 컬럼 'songs'에 list안에 value를 자료형 string으로 바꿔줍니다.
 * Dataframe 'val_train'의 컬럼 'id'를 자료형 int로 바꿔줍니다.
+
 ```python
 data_song_tags['tags'] = data_song_tags['tags'].astype(str)
 count = CountVectorizer(ngram_range=(1,2), min_df=0)
@@ -170,6 +186,7 @@ count_matrix = count.fit_transform(data_song_tags['tags'])
 ```
 * Dataframe 'data_song_tags'의 컬럼 'tags'를 자료형 string으로 바꿔줍니다.
 * Dataframe 'data_song_tags'의 컬럼 'tags'를 counvector화 시켜줍니다.
+
 ```python
 data_tags_song['songs'] = data_tags_song['songs'].apply(lambda x : list(set(x)))
 data_tags_song['songs'] = data_tags_song['songs'].astype(str)
@@ -189,6 +206,7 @@ def sec(times):
     return str(datetime.timedelta(seconds=times)).split(".")[0]
 ```
 * 함수 sec는 구간을 설정하여 소요되는 시간을 알아보고자 만들었습니다.
+
 ```python
  def cos_song(song_id) : 
     indices = pd.Series(data_song_tags.index, index=data_song_tags['song_id'])
@@ -210,6 +228,7 @@ def sec(times):
 * Series 'sim_scores'의 두번째부터 100번째까지 슬라이싱합니다.
 * Series 'sim_scores'의 index를 list화 하여 'song_indices'에 저장합니다.
 * Dataframe 'data_song_tags'의 index에서 list 'song_indices'의 값과 매치되는 컬럼 'song_id'을 조회하여 반환해줍니다.
+
 ```python
 def recommend_result_cos(plylst_id):
     # start = time.time()
@@ -236,6 +255,7 @@ def recommend_result_cos(plylst_id):
 * Dataframe 'result_song'의 컬럼 'song_id'를 list화 하여 'result_songs'에 저장합니다.
 * list 'result_songs'에서 songs에 포함된 노래를 제외하고 'result'에 저장 해줍니다.
 * list 'result'에서 100개를 슬라이싱하여 반환해줍니다.
+
 ```python
 def tag(result):
     # start = time.time()
@@ -253,6 +273,7 @@ def tag(result):
 * Dataframe 'song_tag'에서 컬럼 'song_id'와 list 'result'의 value를 받아서 조회한 컬럼 'song_id'와 'tag'를 Dataframe 'recommend'에 추가 해줍니다.
 * Dataframe 'recommend'에서 컬럼 'tag'를 기준으로 하여 그룹화하여 카운트하고 'song_id'를 기준으로 내림차순 재배열하고 15개로 슬라이싱합니다.
 * Dataframe 'recommend의 index를 list화하여 반환해줍니다.(index가 tag로 설정되어 있습니다.)
+
 ```python
  def cos_tag(tag) : 
     indices = pd.Series(data_tags_song.index, index=data_tags_song['tag'])
@@ -274,6 +295,7 @@ def tag(result):
 * Series 'sim_scores'의 두번째부터 10번째까지 슬라이싱합니다.
 * Series 'sim_scores'의 index를 list화 하여 'song_indices'에 저장합니다.
 * Dataframe 'data_tags_song'의 index에서 list 'song_indices'의 값과 매치되는 컬럼 'tag'을 조회하여 반환해줍니다.
+
 ```python
 def recommend_result_cos_tags(plylst_id):
     # start = time.time()
@@ -299,6 +321,7 @@ def recommend_result_cos_tags(plylst_id):
 * Dataframe 'result_tag'의 컬럼 'tag'를 list화 하여 'result_tags'에 저장합니다.
 * list 'result_tags'에서 tags에 포함된 노래를 제외하고 'result'에 저장 해줍니다.
 * list 'result'에서 10개를 슬라이싱하여 반환해줍니다.
+
 ```python
 def song(result):
     # start = time.time()
@@ -314,6 +337,7 @@ def song(result):
 * Dataframe 'song_tag'에서 컬럼 'song_id'와 list 'result'의 value를 받아서 조회한 컬럼 'song_id'와 'tag'를 Dataframe 'recommend'에 추가 해줍니다.
 * Dataframe 'recommend'에서 컬럼 'song_id'를 기준으로 하여 그룹화하여 카운트하고 'tag'를 기준으로 내림차순 재배열하고 100개로 슬라이싱합니다.
 * Dataframe 'recommend의 index를 list화하여 반환해줍니다.(index가 song로 설정되어 있습니다.)
+
 ```python
 def result_dict_song(plylst_id):
     start = time.time()
@@ -330,6 +354,7 @@ def result_dict_song(plylst_id):
 * Dataframe 'val_train'에서 'id'가 'plylst_id'인 컬럼 'tags'를 list화 시켜 저장한 변수가 'tags_plylst'입니다.
 * 'tags' value에서 'tags_plylst'를 제외시켜줍니다.
 * 제출형식에 맞게 dict형식으로 만들어서 반환해 줍니다.
+
 ```python
 def result_dict_tag(plylst_id):
     start = time.time()
@@ -346,6 +371,7 @@ def result_dict_tag(plylst_id):
 * Dataframe 'val_train'에서 'id'가 'plylst_id'인 컬럼 'songs'를 list화 시켜 저장한 변수가 'songs_plylst'입니다.
 * 'songs' value에서 'songs_plylst'를 제외시켜줍니다.
 * 제출형식에 맞게 dict형식으로 만들어서 반환해 줍니다.
+
 ```python
 val_test = test[['tags','id','songs','plylst_title']]
 val_test['tags'] = val_test['tags'].apply(lambda x : len(x))
@@ -353,16 +379,19 @@ val_test['songs'] = val_test['songs'].apply(lambda x : len(x))
 ```
 * Dataframe 'test'의 컬럼 'id','tags','song','plylst_title'를 Dataframe 'val_test'에 저장합니다.
 * Dataframe 'val_test'의 컬럼 'tags'와 'songs'를 list안의 value 개수로 변환시켜줍니다.
+
 ```python
 val_id = val_test['id'].tolist()
 val_tags_cnt = val_test['tags'].tolist()
 val_songs_cnt = val_test['songs'].tolist()
 ```
 * Dataframe 'val_test'의 컬럼 'id'와 'tags', 'songs'을 각각 list화 시켜줍니다.
+
 ```python
 dic_last_all = []
 ```
 * list 'dic_last_all'를 만들어줍니다.
+
 ```python
 for i in range(0,len(val_id)) : 
     if val_tags_cnt[i] == 0 :
@@ -391,11 +420,13 @@ for i in range(0,len(val_id)) :
 result_data = pd.DataFrame(dic_last_all)
 ```
 * list 'dic_last_all'를 Dataframe화 시켜주고 'result_data'에 저장합니다.
+
 ```python
 result_data['songs'] = result_data['songs'].apply(lambda x : len(x))
 result_data['tags'] = result_data['tags'].apply(lambda x : len(x))
 ```
 * Dataframe 'result_data'의 컬럼 'song'와 'tags'를 각각의 value 개수화하여 저장합니다.
+
 ```python
 song_non = [144663,
  116573,
@@ -499,18 +530,22 @@ song_non = [144663,
  154858]
 ```
 * 'song_non'는 mapping_cnt를 기준으로 한 상위 100개의 song list입니다. 
+
 ```python
 tag_non = ['기분전환', '감성', '휴식', '발라드', '잔잔한', '드라이브', '힐링', '사랑', '새벽', '밤']
 ```
 * 'tag_non'는 mapping_cnt를 기준으로 한 상위 10개의 tag list입니다. 
+
 ```python
 song_fill = result_data[result_data['songs']<100].reset_index()
 ```
 * Dataframe 'result_data'의 컬럼 'songs'가 100개미만인 data를 조회하고 index를 초기화하여 'song_fill'에 저장합니다.
+
 ```python
 song_fill_list = song_fill['index'].tolist()
 ```
 * Dataframe 'song_fill'의 컬럼 'index'를 list화 하여 'song_fill_list'에 저장합니다.
+
 ```python
  for i in song_fill_list:
     dic_last_all[i]['songs'].extend(song_non)
@@ -518,14 +553,17 @@ song_fill_list = song_fill['index'].tolist()
 ```
 * 추천 받아야할 노래 개수가 100곡이므로 개수가 채워지지 않은 부분에서 mapping_cnt가 높은 상위 노래 100개으로 채워넣어서 개수를 맞춰 주었습니다.
 * song_fill_list의 value를 차례대로 넣어서 lsit 'dic_last_all' index의 'songs'에 채워넣고 개수에 맞게 100개씩 슬라이싱합니다.  
+
 ```python
 tag_fill = result_data[result_data['tags']<10].sort_values('tags',ascending = False).reset_index()
 ```
 * Dataframe 'result_data'의 컬럼 'tags'가 10개미만인 data를 조회하고 index를 초기화하여 'tag_fill'에 저장합니다.
+
 ```python
 tag_fill_list = tag_fill['index'].tolist()
 ```
 * Dataframe 'tag_fill'의 컬럼 'index'를 list화 하여 'tag_fill_list'에 저장합니다.
+
 ```python
 for i in tag_fill_list:
     tag = dic_last_all[i]['tags']
@@ -534,6 +572,7 @@ for i in tag_fill_list:
 ```
 * 추천 받아야할 tag 개수가 10개이므로 개수가 채워지지 않은 부분에서 mapping_cnt가 높은 상위 tag 10개으로 채워넣어서 개수를 맞춰 주었습니다.
 * tag_fill_list의 value를 차례대로 넣어서 lsit 'dic_last_all' index의 'tags'에 채워넣고 개수에 맞게 100개씩 슬라이싱합니다. 
+
 ```python
 with open('results.json', 'w', encoding='utf-8') as make_file:
     json.dump(dic_last_all, make_file, ensure_ascii=False, indent="\t")
